@@ -16,6 +16,7 @@ nano /etc/nginx/nginx.conf
 ### Change logformat
 ```
 nano /etc/nginx/nginx.conf
+
 http {
     log_format login_failure '$remote_addr - $remote_user [$time_local] '
                          '"$request" $status $body_bytes_sent '
@@ -69,17 +70,17 @@ server {
        modsecurity_rules_file /etc/nginx/modsec/main.conf;
 	
        location / {
-    	      proxy_pass https://127.0.0.1:8080 ;
-   	        proxy_buffering off;
+    	    proxy_pass https://127.0.0.1:8080 ;
+   	    proxy_buffering off;
 
             proxy_http_version 1.1;
             proxy_set_header Connection "Keep-Alive";
             proxy_set_header Proxy-Connection "Keep-Alive";
 
-			      proxy_set_header X-Real-IP $remote_addr;
+	    proxy_set_header X-Real-IP $remote_addr;
             proxy_set_header X-Forwarded-Host $host;
             proxy_set_header X-Forwarded-Port $server_port;
-			      proxy_set_header X-Forwarded-Host $server_name;
+	    proxy_set_header X-Forwarded-Host $server_name;
        }
 
 }
